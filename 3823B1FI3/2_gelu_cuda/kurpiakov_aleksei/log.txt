@@ -1,17 +1,1 @@
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/2_gelu_cuda/kurpiakov_aleksei/gelu_cuda.cu(13): error: identifier "i" is undefined
-          float4 x4 = in[i];
-                         ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/2_gelu_cuda/kurpiakov_aleksei/gelu_cuda.cu(43): error: identifier "d_in" is undefined
-          if (d_in)
-              ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/2_gelu_cuda/kurpiakov_aleksei/gelu_cuda.cu(45): error: identifier "d_out" is undefined
-          if (d_out)
-              ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/2_gelu_cuda/kurpiakov_aleksei/gelu_cuda.cu(57): error: no suitable conversion function from "const std::vector<float, std::allocator<float>>" to "const void *" exists
-      cudaMemcpyAsync(vec_in, input, bytes, cudaMemcpyHostToDevice, stream);
-                              ^
-
-4 errors detected in the compilation of "/home/crazyproger/sandbox/cuda-2026/3823B1FI3/2_gelu_cuda/kurpiakov_aleksei/gelu_cuda.cu".
+Number of bytes in output 100 is not matched with expected 400
