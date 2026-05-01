@@ -63,7 +63,7 @@ std::vector<float> GeluCUDA(const std::vector<float>& input) {
     Kernel<<<grid, tpb, 0, stream>>>((float4*)vec_in, (float4*)vec_res, n);
 
 
-    std::vector<float> output(n); 
+    std::vector<float> output(input.size()); 
     cudaMemcpyAsync(output.data(), vec_res, bytes, cudaMemcpyDeviceToHost, stream);
     cudaStreamSynchronize(stream);
     return output;
