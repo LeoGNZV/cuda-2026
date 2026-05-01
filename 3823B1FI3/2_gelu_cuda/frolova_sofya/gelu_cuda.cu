@@ -1,4 +1,3 @@
-// gelu_cuda.cu
 #include "gelu_cuda.h"
 #include <cuda_runtime.h>
 #include <algorithm>
@@ -11,7 +10,6 @@ __global__ void gelu_kernel(const float* __restrict__ input,
 
     float x = input[idx];
 
-    // Constants
     const float c1 = 0.044715f;
     const float c2 = 0.7978845608f;  // sqrt(2/pi)
 
@@ -19,7 +17,7 @@ __global__ void gelu_kernel(const float* __restrict__ input,
     float inner = c2 * (x + c1 * x * x2);
     float z = 2.0f * inner;
 
-    float neg_z = -fminf(z, 20.0f);  
+    float neg_z = -fminf(z, 20.0f);
     float sigmoid = __fdividef(1.0f, 1.0f + __expf(neg_z));
 
     output[idx] = x * sigmoid;
@@ -30,7 +28,6 @@ std::vector<float> GeluCUDA(const std::vector<float>& input) {
     std::vector<float> output(N);
     if (N == 0) return output;
 
-    // Register host memory for asynchronous transfers
     cudaHostRegister((void*)input.data(), N * sizeof(float), cudaHostRegisterDefault);
     cudaHostRegister(output.data(), N * sizeof(float), cudaHostRegisterDefault);
 
@@ -38,14 +35,12 @@ std::vector<float> GeluCUDA(const std::vector<float>& input) {
     const int num_streams = 2;
     cudaStream_t streams[num_streams];
 
-    // Allocate device memory once
     cudaMalloc(&d_input, N * sizeof(float));
     cudaMalloc(&d_output, N * sizeof(float));
 
     for (int i = 0; i < num_streams; ++i)
-        cudaStreamCreate(&streams[I]);
+        cudaStreamCreate(&streams[i]);   
 
-    // Overlap transfers and computation using multiple streams
     size_t chunk_size = (N + num_streams - 1) / num_streams;
     for (int i = 0; i < num_streams; ++i) {
         size_t offset = i * chunk_size;
@@ -54,7 +49,7 @@ std::vector<float> GeluCUDA(const std::vector<float>& input) {
 
         cudaMemcpyAsync(d_input + offset, input.data() + offset,
                         size * sizeof(float),
-                        cudaMemcpyHostToDevice, streams[I]);
+                        cudaMemcpyHostToDevice, streams[i]);  
 
         int block = 256;
         int grid = (size + block - 1) / block;
@@ -63,14 +58,12 @@ std::vector<float> GeluCUDA(const std::vector<float>& input) {
 
         cudaMemcpyAsync(output.data() + offset, d_output + offset,
                         size * sizeof(float),
-                        cudaMemcpyDeviceToHost, streams[I]);
-    }
+                        cudaMemcpyDeviceToHost, streams[i]);  
+    } I
 
-    // Wait for all operations to complete
     cudaDeviceSynchronize();
 
-    // Cleanup
-    for (int i = 0; i < num_streams; ++i) cudaStreamDestroy(streams[I]);
+    for (int i = 0; i < num_streams; ++i) cudaStreamDestroy(streams[i]);  
     cudaFree(d_input);
     cudaFree(d_output);
     cudaHostUnregister((void*)input.data());
