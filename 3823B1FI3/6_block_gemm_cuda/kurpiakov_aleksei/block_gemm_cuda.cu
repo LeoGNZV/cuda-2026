@@ -1,7 +1,7 @@
 #include "block_gemm_cuda.h"
 #include <cuda_runtime.h>
 
-static const blk_size = 32
+static const blk_size = 32;
 
 __global__ void Kernel(float* vec_a, float* vec_a, float* vec_c, int n, int num_blocks){
     __shared__ float A[blk_size][blk_size];
