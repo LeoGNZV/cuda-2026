@@ -1,119 +1,17 @@
 /home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(4): error: explicit type is missing ("int" assumed)
-  static const blk_size = 32
+  static const blk_size = 32;
                ^
 
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(6): error: expected a ";"
+/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(6): error: duplicate parameter name
   __attribute__((global)) void Kernel(float* vec_a, float* vec_a, float* vec_c, int n, int num_blocks){
-  ^
+                                                           ^
 
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(23): warning #607-D: this pragma must immediately precede a statement
-  #pragma unroll
-          ^
-
-Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(28): warning #12-D: parsing restarts here after previous syntax error
-          __syncthreads();
-                         ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(29): error: expected a declaration
-      }
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(32): error: expected a declaration
-  }
-  ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(61): warning #12-D: parsing restarts here after previous syntax error
-              cudaStreamCreate(&stream);
-                                       ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(63): error: this declaration has no storage class or type specifier
-          allocated_size = bytes;
-          ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(63): error: identifier "bytes" is undefined
-          allocated_size = bytes;
-                           ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(64): error: expected a declaration
-      }
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(67): error: this declaration has no storage class or type specifier
-      cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(67): error: declaration is incompatible with "cudaError_t cudaMemcpyAsync(void *, const void *, size_t, cudaMemcpyKind, cudaStream_t)" (declared at line 7226 of /usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h)
-      cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(67): error: identifier "vec_b" is undefined
-      cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
-                      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(67): error: identifier "b" is undefined
-      cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
-                             ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(67): error: identifier "stream" is undefined
-      cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
-                                                                      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(67): error: too many initializer values
-      cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
-                             ^
+/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(19): error: identifier "vec_b" is undefined
+          B[threadIdx.y][threadIdx.x] = vec_b[(block_k * blk_size + threadIdx.y) * n + tid_x];
+                                        ^
 
 /home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(70): error: explicit type is missing ("int" assumed)
       static const size = n / blk_size;
                    ^
 
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(70): error: identifier "n" is undefined
-      static const size = n / blk_size;
-                          ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(73): error: this declaration has no storage class or type specifier
-      Kernel<<<grid, tread_net, 0, stream>>>((float*)vec_a, (float*)vec_b, (float*)vec_c, n, size);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(73): error: expected a ";"
-      Kernel<<<grid, tread_net, 0, stream>>>((float*)vec_a, (float*)vec_b, (float*)vec_c, n, size);
-            ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(77): error: this declaration has no storage class or type specifier
-      cudaMemcpyAsync(output.data(), vec_c, bytes, cudaMemcpyDeviceToHost, stream);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(77): error: variable "cudaMemcpyAsync" has already been defined (previous definition at line 67)
-      cudaMemcpyAsync(output.data(), vec_c, bytes, cudaMemcpyDeviceToHost, stream);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(77): error: identifier "vec_c" is undefined
-      cudaMemcpyAsync(output.data(), vec_c, bytes, cudaMemcpyDeviceToHost, stream);
-                                     ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(77): error: too many initializer values
-      cudaMemcpyAsync(output.data(), vec_c, bytes, cudaMemcpyDeviceToHost, stream);
-                                     ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(77): error: a value of type "float *" cannot be used to initialize an entity of type "int"
-      cudaMemcpyAsync(output.data(), vec_c, bytes, cudaMemcpyDeviceToHost, stream);
-                      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(78): error: this declaration has no storage class or type specifier
-      cudaStreamSynchronize(stream);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(78): error: declaration is incompatible with "cudaError_t cudaStreamSynchronize(cudaStream_t)" (declared at line 2946 of /usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h)
-      cudaStreamSynchronize(stream);
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(79): error: expected a declaration
-      return output;
-      ^
-
-/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu(80): error: expected a declaration
-  }
-  ^
-
-26 errors detected in the compilation of "/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu".
+4 errors detected in the compilation of "/home/crazyproger/sandbox/cuda-2026/3823B1FI3/6_block_gemm_cuda/kurpiakov_aleksei/block_gemm_cuda.cu".
