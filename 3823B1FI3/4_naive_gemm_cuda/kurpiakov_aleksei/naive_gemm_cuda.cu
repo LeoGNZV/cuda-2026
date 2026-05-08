@@ -56,7 +56,7 @@ std::vector<float> NaiveGemmCUDA(const std::vector<float>& a,
     cudaMemcpyAsync(vec_b, b.data(), bytes, cudaMemcpyHostToDevice, stream);
 
     dim3 tread_net(32, 32);
-    static const int size = (n - 31) / 32;
+    const int size = (n + 31) / 32;
     dim3 grid(size, size);
 
     Kernel<<<grid, tread_net, 0, stream>>>((float*)vec_a, (float*)vec_b, (float*)vec_c, n);
